@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yetkili Servis Paneli</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        background: #f4f6f9;
+      }
+      .sidebar {
+        width: 240px;
+        background: #2c3e50;
+        color: #fff;
+        position: fixed;
+        height: 100vh;
+      }
+      .sidebar .nav-link {
+        color: #fff;
+        margin-bottom: 8px;
+      }
+      .sidebar .nav-link.active,
+      .sidebar .nav-link:hover {
+        background: #34495e;
+        color: #fff;
+      }
+      .main-content {
+        margin-left: 240px;
+        padding: 32px;
+      }
+      .navbar {
+        background: #fff;
+        box-shadow: 0 2px 8px #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Yetkili Servis Paneli</a>
+        <div class="d-flex">
+          <span class="me-3"><i class="fas fa-user"></i> Servis</span>
+          <a href="login.html" class="btn btn-outline-danger btn-sm">Çıkış</a>
+        </div>
+      </div>
+    </nav>
+    <div class="sidebar p-3">
+      <h5 class="mb-4">Menü</h5>
+      <nav class="nav flex-column">
+        <a class="nav-link active" href="#">Servis Kayıtları</a>
+        <a class="nav-link" href="#">Garanti İşlemleri</a>
+        <a class="nav-link" href="#">Cari Hesap</a>
+      </nav>
+    </div>
+    <div class="main-content">
+      <h2>Hoşgeldiniz, Yetkili Servis!</h2>
+      <p>
+        Sadece kendi servis ve müşteri taleplerinizi buradan yönetebilirsiniz.
+      </p>
+      <!-- Dinamik içerik buraya gelecek -->
+    </div>
+  </body>
+</html>

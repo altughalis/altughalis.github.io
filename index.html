@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Teknik Servis - Yönetim Paneli</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="login-container">
+      <h2>Giriş Yap</h2>
+      <div id="superadmin-login" class="login-form">
+        <h3>Süper Admin Girişi</h3>
+        <form id="form-superadmin">
+          <label for="sa-username">Kullanıcı Adı:</label>
+          <input type="text" id="sa-username" required />
+          <label for="sa-password">Şifre:</label>
+          <input type="password" id="sa-password" required />
+          <button type="submit">Giriş</button>
+        </form>
+      </div>
+      <div id="user-login" class="login-form">
+        <h3>Diğer Kullanıcı Girişi</h3>
+        <form id="form-user">
+          <label for="user-username">Kullanıcı Adı:</label>
+          <input type="text" id="user-username" required />
+          <label for="user-password">Şifre:</label>
+          <input type="password" id="user-password" required />
+          <label for="user-role">Rol Seçiniz:</label>
+          <select id="user-role" required>
+            <option value="">Seçiniz</option>
+            <option value="turkiye-distributor">Türkiye Distribütörü</option>
+            <option value="ana-bayi">Ana Bayi</option>
+            <option value="alt-bayi">Alt Bayi</option>
+            <option value="yetkili-servis">Yetkili Servis</option>
+          </select>
+          <button type="submit">Giriş</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="admin-panel" style="display: none">
+      <header>
+        <h1>Teknik Servis - Yönetim Paneli</h1>
+        <div id="user-info"></div>
+        <button id="logout-btn">Çıkış</button>
+      </header>
+      <main>
+        <aside id="sidebar">
+          <h3>Yetkili Servisler</h3>
+          <ul id="service-hierarchy"></ul>
+          <div id="bayi-management" style="margin-top: 20px">
+            <h3>Yeni Bayi Ekle</h3>
+            <form id="form-add-bayi">
+              <label for="region">Bölge:</label>
+              <input type="text" id="region" required />
+              <label for="city">İl:</label>
+              <input type="text" id="city" required />
+              <label for="bayi-name">Bayi Adı:</label>
+              <input type="text" id="bayi-name" required />
+              <label for="parent-bayi">Alt Bayi (Opsiyonel):</label>
+              <select id="parent-bayi">
+                <option value="">Yok</option>
+              </select>
+              <label for="bayi-email">E-posta:</label>
+              <input type="email" id="bayi-email" required />
+              <label for="bayi-password">Şifre:</label>
+              <input type="password" id="bayi-password" required />
+              <button type="submit">Bayi Ekle</button>
+            </form>
+          </div>
+        </aside>
+        <section id="content">
+          <div id="service-form-container">
+            <h2>Servis Formu</h2>
+            <form id="service-form">
+              <label for="customer-name">Müşteri Adı</label>
+              <input type="text" id="customer-name" required />
+
+              <label for="device-brand">Cihaz Markası</label>
+              <select id="device-brand" required>
+                <option value="">Seçiniz</option>
+                <option value="Samsung">Samsung</option>
+                <option value="Apple">Apple</option>
+                <option value="Huawei">Huawei</option>
+                <option value="Xiaomi">Xiaomi</option>
+                <option value="Diğer">Diğer</option>
+              </select>
+
+              <label for="device-model">Cihaz Modeli</label>
+              <input type="text" id="device-model" required />
+
+              <label for="problem-description">Problem Açıklaması</label>
+              <textarea id="problem-description" rows="4" required></textarea>
+
+              <label for="warranty">Garanti</label>
+              <select id="warranty" required>
+                <option value="var">Var</option>
+                <option value="yok">Yok</option>
+              </select>
+
+              <label for="price-sale">Satma Tutarı (₺)</label>
+              <input type="number" id="price-sale" min="0" step="0.01" />
+
+              <label for="price-purchase">Alma Tutarı (₺)</label>
+              <input type="number" id="price-purchase" min="0" step="0.01" />
+
+              <label for="price-repair">Tamir Tutarı (₺)</label>
+              <input type="number" id="price-repair" min="0" step="0.01" />
+
+              <label for="image-upload">Resim Ekle (opsiyonel)</label>
+              <input type="file" id="image-upload" accept="image/*" />
+              <div id="image-preview">Henüz resim seçilmedi.</div>
+
+              <button type="submit" id="save-send-btn">Kaydet / Gönder</button>
+              <button type="button" id="save-draft-btn">
+                Taslak Olarak Kaydet
+              </button>
+            </form>
+          </div>
+
+          <div id="quick-actions">
+            <h3>Hızlı İşlemler</h3>
+            <button id="view-dealers-btn">Tüm Bayileri Görüntüle</button>
+            <button id="manage-payments-btn">Ödemeleri Yönet</button>
+            <button id="settings-btn">Ayarlar</button>
+          </div>
+
+          <div
+            id="bayi-selection-container"
+            style="margin-bottom: 20px; display: none"
+          >
+            <label for="bayi-select">Bayi Seçiniz:</label>
+            <select id="bayi-select">
+              <option value="">Seçiniz</option>
+            </select>
+          </div>
+
+          <div
+            id="cari-calculation-container"
+            style="margin-bottom: 20px; display: none"
+          >
+            <h3>Cari Hesaplama</h3>
+            <button id="calculate-from-records-btn">Kayıtlardan Hesapla</button>
+            <form id="cari-form">
+              <label for="gelir">Gelir:</label>
+              <input type="number" id="gelir" required min="0" step="0.01" />
+              <label for="gider">Gider:</label>
+              <input type="number" id="gider" required min="0" step="0.01" />
+              <button type="submit">Hesapla</button>
+            </form>
+            <div id="cari-result" style="margin-top: 10px"></div>
+            <button
+              id="cari-gonder-btn"
+              style="display: none; margin-top: 10px"
+            >
+              Gönder
+            </button>
+            <div id="cari-preview" style="margin-top: 10px"></div>
+          </div>
+
+          <div id="service-records-container">
+            <h3>Tüm Servis Kayıtları</h3>
+            <ul id="service-records-list"></ul>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
