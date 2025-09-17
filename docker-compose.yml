@@ -21,17 +21,16 @@ services:
       - "5000"
     networks: [appnet]
 
-  web:
-    build: ./frontend     # frontend klasörün varsa burası doğru
-    restart: unless-stopped
-    depends_on:
-      - api
-    ports:
-      - "80:80"
-    networks: [appnet]
-
+ web:
+  build: ./frontend
+  restart: unless-stopped
+  depends_on: [api]
+  ports:
+    - "8080:80"   # 80 yerine 8080
+  networks: [appnet]
 networks:
   appnet:
 
 volumes:
   mongo_data:
+
