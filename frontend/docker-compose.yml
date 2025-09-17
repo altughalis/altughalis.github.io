@@ -1,0 +1,7 @@
+web:
+  build: ./frontend
+  restart: unless-stopped
+  depends_on: [api]
+  ports:
+    - "80:80"
+  networks: [appnet]
