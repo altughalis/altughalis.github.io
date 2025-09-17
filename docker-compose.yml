@@ -1,42 +1,34 @@
 services:
   mongo:
     image: mongo:7
-    container_name: mongo
     restart: unless-stopped
     environment:
       MONGO_INITDB_DATABASE: appdb
     volumes:
       - mongo_data:/data/db
-    networks:
-      - appnet
+    networks: [appnet]
 
   api:
-    build: ./server
-    container_name: api
+    build: ./backend      # <-- burada “server” değil “backend” olmalı
     restart: unless-stopped
     depends_on:
       - mongo
-    env_file:
-      - ./.env
     environment:
       NODE_ENV: production
       PORT: 5000
       MONGO_URI: ${MONGO_URI:-mongodb://mongo:27017/appdb}
     expose:
       - "5000"
-    networks:
-      - appnet
+    networks: [appnet]
 
   web:
-    build: ./web
-    container_name: web
+    build: ./frontend     # frontend klasörün varsa burası doğru
     restart: unless-stopped
     depends_on:
       - api
     ports:
       - "80:80"
-    networks:
-      - appnet
+    networks: [appnet]
 
 networks:
   appnet:
