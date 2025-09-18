@@ -6,32 +6,35 @@ services:
       MONGO_INITDB_DATABASE: appdb
     volumes:
       - mongo_data:/data/db
-    networks: [appnet]
+    networks:
+      - appnet
 
   api:
-    build: ./backend      # <-- burada “server” değil “backend” olmalı
+    build: ./backend
     restart: unless-stopped
     depends_on:
       - mongo
     environment:
       NODE_ENV: production
-      PORT: 5000
+      PORT: "5000"
       MONGO_URI: ${MONGO_URI:-mongodb://mongo:27017/appdb}
     expose:
       - "5000"
-    networks: [appnet]
+    networks:
+      - appnet
 
- web:
-  build: ./frontend
-  restart: unless-stopped
-  depends_on: [api]
-  ports:
-    - "8080:80"   # 80 yerine 8080
+  web:
+    build: ./frontend
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "8080:80"     # host:container (80 doluysa 8080 kullanıyoruz)
+    networks:
+      - appnet
 
-  networks: [appnet]
 networks:
   appnet:
 
 volumes:
   mongo_data:
-
