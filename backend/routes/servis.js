@@ -20,6 +20,17 @@ router.get("/", async (req, res) => {
   res.json(servisler);
 });
 
+// Alt bayiye ait servis kayıtlarını getir
+router.get("/altbayi/:altBayiId", async (req, res) => {
+  try {
+    const { altBayiId } = req.params;
+    const servisKayitlari = await Servis.find({ altBayiId });
+    res.json(servisKayitlari);
+  } catch (err) {
+    res.status(500).json({ error: "Servis kayıtları getirilemedi" });
+  }
+});
+
 // Servis sil
 router.delete("/:id", async (req, res) => {
   try {
