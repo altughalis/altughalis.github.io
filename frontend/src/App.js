@@ -12,6 +12,7 @@ import ServisPanel from "./pages/ServisPanel";
 import AnaBayiLogin from "./pages/AnaBayiLogin";
 import Login from "./pages/Login";
 import "./App.css";
+import ServisPanelYetkili from "./pages/ServisPanelYetkili";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -58,7 +59,7 @@ function App() {
         ) : user.role === "servis" ? (
           <Route
             path="/*"
-            element={<ServisPanel user={user} token={token} />}
+            element={<ServisPanelYetkili user={user} token={token} />}
           />
         ) : (
           <Route path="*" element={<Navigate to="/" />} />

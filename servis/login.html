@@ -29,7 +29,7 @@
   <body>
     <div class="login-container">
       <h2 class="login-title text-center mb-4">Yetkili Servis Paneli Giriş</h2>
-      <form>
+      <form id="loginForm">
         <div class="mb-3">
           <label for="email" class="form-label">E-posta</label>
           <input type="email" class="form-control" id="email" required />
@@ -40,6 +40,17 @@
         </div>
         <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
       </form>
+      <script>
+        document
+          .getElementById("loginForm")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            var email = document.getElementById("email").value;
+            // Basit demo: servis adını localStorage'a kaydet
+            localStorage.setItem("servisEmail", email);
+            window.location.href = "panel_yetkili.html";
+          });
+      </script>
     </div>
   </body>
 </html>

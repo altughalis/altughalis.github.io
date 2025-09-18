@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Teknik Servis - Yönetim Paneli</title>
+  <style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+  color: #333;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logout-btn {
+  padding: 6px 12px;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.left-panel {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+form label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 14px;
+}
+
+input[type="text"],
+textarea,
+select,
+input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-primary {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.record {
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+  font-size: 14px;
+}
+
+#previewArea img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin-top: 10px;
+}
+  </style>
+</head>
+<body>
+  <header class="top-bar">
+    <h2>Teknik Servis - Yönetim Paneli</h2>
+    <div class="user-info">
+      <span id="user-info">admin (admin)</span>
+      <button class="logout-btn">Çıkış</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Sol Kısım -->
+    <section class="left-panel">
+      <div class="card">
+        <h3>Servis Formu</h3>
+        <form>
+          <label>Müşteri Adı</label>
+          <input type="text" placeholder="Müşteri adı girin">
+
+          <label>Cihaz Modeli</label>
+          <input type="text" placeholder="Cihaz modeli girin">
+
+          <label>Problem Açıklaması</label>
+          <textarea placeholder="Problemi açıklayın"></textarea>
+
+          <label>Garanti</label>
+          <select>
+            <option>Var</option>
+            <option>Yok</option>
+          </select>
+
+          <label>Resim Ekle (opsiyonel)</label>
+          <input type="file" id="imageInput" accept="image/*">
+
+          <div class="form-buttons">
+            <button type="submit" class="btn-primary">Kaydet / Gönder</button>
+            <button type="button" class="btn-secondary">Taslak Olarak Kaydet</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3>Tüm Servis Kayıtları</h3>
+        <div class="record">
+          <p><strong>#1757583323058 — 11.09.2025 12:35:23</strong></p>
+          <p><b>refrsan — 1234</b></p>
+          <p><b>Problem:</b> deneme yapıldı</p>
+          <p><small>Kaydı açan: admin</small></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sağ Kısım -->
+    <aside class="right-panel">
+      <div class="card">
+        <h3>Hızlı İşlemler</h3>
+        <button class="btn-secondary">Tüm Bayileri Görüntüle</button>
+        <button class="btn-secondary">Ödemeleri Yönet</button>
+        <button class="btn-secondary">Ayarlar</button>
+      </div>
+
+      <div class="card">
+        <h3>Resim Yükleme Önizleme</h3>
+        <div id="previewArea">
+          <p>Henüz resim seçilmedi.</p>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    // Servis kullanıcısı bilgisini göster
+    var servisEmail = localStorage.getItem("servisEmail");
+    document.getElementById("user-info").textContent = servisEmail ? servisEmail : "Giriş yapılmadı";
+
+    document.querySelector(".logout-btn").addEventListener("click", function () {
+      localStorage.removeItem("servisEmail");
+      window.location.href = "login.html";
+    });
+
+    document.getElementById("imageInput").addEventListener("change", function () {
+      const previewArea = document.getElementById("previewArea");
+      previewArea.innerHTML = ""; // Önceki içeriği temizle
+
+      const file = this.files[0];
+      if (file) {
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+        img.onload = () => URL.revokeObjectURL(img.src); // Belleği temizle
+        previewArea.appendChild(img);
+      } else {
+        previewArea.innerHTML = "<p>Henüz resim seçilmedi.</p>";
+      }
+    });
+  </script>
+</body>
+</html>

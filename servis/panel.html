@@ -47,8 +47,15 @@
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Yetkili Servis Paneli</a>
         <div class="d-flex">
-          <span class="me-3"><i class="fas fa-user"></i> Servis</span>
-          <a href="login.html" class="btn btn-outline-danger btn-sm">Çıkış</a>
+          <span class="me-3" id="servisUser"
+            ><i class="fas fa-user"></i> Servis</span
+          >
+          <a
+            href="login.html"
+            class="btn btn-outline-danger btn-sm"
+            onclick="localStorage.removeItem('servisEmail')"
+            >Çıkış</a
+          >
         </div>
       </div>
     </nav>
@@ -61,11 +68,21 @@
       </nav>
     </div>
     <div class="main-content">
-      <h2>Hoşgeldiniz, Yetkili Servis!</h2>
+      <h2 id="welcomeTitle">Hoşgeldiniz, Yetkili Servis!</h2>
       <p>
         Sadece kendi servis ve müşteri taleplerinizi buradan yönetebilirsiniz.
       </p>
       <!-- Dinamik içerik buraya gelecek -->
     </div>
+    <script>
+      // Servis email bilgisini göster
+      var servisEmail = localStorage.getItem("servisEmail");
+      if (servisEmail) {
+        document.getElementById("servisUser").innerHTML =
+          '<i class="fas fa-user"></i> ' + servisEmail;
+        document.getElementById("welcomeTitle").textContent =
+          "Hoşgeldiniz, " + servisEmail + "!";
+      }
+    </script>
   </body>
 </html>

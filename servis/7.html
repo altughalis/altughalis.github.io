@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ödemeler Yönetimi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Ödemeler Yönetimi</h1>
+        <p>Bu sayfada ödemeleri yönetebilirsiniz.</p>
+        <div class="payment-section">
+            <h2>Ödeme Kayıtları</h2>
+            <table id="payments-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Müşteri</th>
+                        <th>Tutar</th>
+                        <th>Tarih</th>
+                        <th>Durum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Ahmet Yılmaz</td>
+                        <td>500 TL</td>
+                        <td>2023-10-01</td>
+                        <td>Ödendi</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Mehmet Kaya</td>
+                        <td>750 TL</td>
+                        <td>2023-10-02</td>
+                        <td>Bekliyor</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ayşe Demir</td>
+                        <td>300 TL</td>
+                        <td>2023-10-03</td>
+                        <td>Ödendi</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="add-payment">
+            <h2>Yeni Ödeme Ekle</h2>
+            <form id="payment-form">
+                <label for="customer">Müşteri:</label>
+                <input type="text" id="customer" name="customer" required>
+                
+                <label for="amount">Tutar:</label>
+                <input type="number" id="amount" name="amount" required>
+                
+                <label for="date">Tarih:</label>
+                <input type="date" id="date" name="date" required>
+                
+                <label for="status">Durum:</label>
+                <select id="status" name="status">
+                    <option value="Bekliyor">Bekliyor</option>
+                    <option value="Ödendi">Ödendi</option>
+                </select>
+                
+                <button type="submit">Ekle</button>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
