@@ -1,9 +1,20 @@
 # React'ı build et
 FROM node:18-alpine AS build
 WORKDIR /app
+
+# Bağımlılıkları yükle
 COPY package*.json ./
 RUN npm install
+
+# Kaynak kodu kopyala
 COPY . .
+
+# Kodda sabit yazılmış API adreslerini /api ile değiştir
+# (örn. http://localhost:5000 -> /api)
+RUN find /app -type f \( -name "*.js" -o -name "*.ts" -o -name "*.tsx" \) \
+    -exec sed -i 's|http://localhost:5000|/api|g' {} +
+
+# Prod build
 RUN npm run build
 
 # Nginx ile servis et
